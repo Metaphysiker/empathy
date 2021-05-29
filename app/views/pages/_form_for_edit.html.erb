@@ -21,7 +21,9 @@
     <p>
       <strong>Platz tauschen mit: </strong>
     </p>
-    <%= f.input :order %>
+    <%#= f.input :order, label: false %>
+    <%= f.input :order, label: false, as: :select, collection: Page.all.order(:order).map { |n| [n.title, n.order]} %>
+    <br />
   </div>
 
   <div class="form-actions">

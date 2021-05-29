@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 
   # GET /pages or /pages.json
   def index
+    authorize Page
     @pages = Page.all
   end
 
@@ -13,16 +14,18 @@ class PagesController < ApplicationController
   # GET /pages/new
   def new
     @page = Page.new
+    authorize @page
   end
 
   # GET /pages/1/edit
   def edit
+    authorize @page
   end
 
   # POST /pages or /pages.json
   def create
     @page = Page.new(page_params)
-
+    authorize @page
     respond_to do |format|
       if @page.save
         format.html { redirect_to @page, notice: "Page was successfully created." }
@@ -36,6 +39,7 @@ class PagesController < ApplicationController
 
   # PATCH/PUT /pages/1 or /pages/1.json
   def update
+    authorize @page
     respond_to do |format|
       if @page.update(page_params)
         format.html { redirect_to @page, notice: "Page was successfully updated." }
@@ -49,6 +53,7 @@ class PagesController < ApplicationController
 
   # DELETE /pages/1 or /pages/1.json
   def destroy
+    authorize @page
     @page.destroy
     respond_to do |format|
       format.html { redirect_to pages_url, notice: "Page was successfully destroyed." }
