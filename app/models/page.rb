@@ -10,14 +10,20 @@ class Page < ApplicationRecord
     actual_order = Page.all.order(:order).pluck(:order)
     missing_number = array_number_of_pages - actual_order
 
-    Page.where(order: self.order).each do |page|
+    if self.order.blank?
+      self_order = Page.all.count + 1
+    else
+      self_order = self.order
+    end
+
+    Page.where(order: self_order).each do |page|
       next if page == self
       page.update_columns(order: missing_number.first)
     end
 
     Page.all.each do |page|
       next if page == self
-      if page.order == self.order || page.order > self.order
+      if page.order == self_order || page.order > self_order
         #puts page.title
         page.update_columns(order: page.order + 1)
       end
