@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :user_roles
+  resources :roles
   devise_for :users
   resources :chat_messages
   get 'chat', to: 'chat#chat', as: "chat"
