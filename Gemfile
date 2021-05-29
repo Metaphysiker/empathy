@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+gem 'friendly_id', '~> 5.4.0'
+gem 'rmagick'
 gem 'devise'
 gem 'simple_form'
 gem 'sanitize'
